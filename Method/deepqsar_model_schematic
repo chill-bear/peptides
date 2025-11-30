@@ -1,0 +1,25 @@
+// DeepQSAR Dual-Model Schematic
+digraph {
+	fontname=Helvetica fontsize=11 rankdir=LR splines=spline
+	Input [label="Input
+(Peptide Sequence)" fillcolor="#B3E5FC" shape=box style=filled]
+	Embedding [label="Embedding Layer
+(12×16)" fillcolor="#4DD0E1" shape=box style=filled]
+	BiLSTM [label="Bidirectional LSTM
+(2×16)" fillcolor="#4DD0E1" shape=box style=filled]
+	Dense1A [label="Dense Layer
+(8 units)" fillcolor="#AED581" shape=box style=filled]
+	Out1 [label="Output: IC₅₀
+(Regression)" fillcolor="#B0BEC5" shape=box style=filled]
+	Dense2A [label="Dense Layer
+(8 units)" fillcolor="#FFCC80" shape=box style=filled]
+	Out2 [label="Output: AMP Activity
+(Classification)" fillcolor="#B0BEC5" shape=box style=filled]
+	Input -> Embedding
+	Embedding -> BiLSTM
+	BiLSTM -> Dense1A [label="Model 1"]
+	Dense1A -> Out1
+	BiLSTM -> Dense2A [label="Model 2"]
+	Dense2A -> Out2
+	Dense1A -> Dense2A [label="Transfer weights" constraint=false style=dashed]
+}
